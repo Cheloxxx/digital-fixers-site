@@ -21,11 +21,11 @@ const Header = () => {
       <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
         <div className="flex items-center">
           <img
-            src="/src/assets/DigitalFixersLogoNoLetters.png"
+            src="/DigitalFixersLogoNoLetters.png"
             alt="Digital Fixers RVC Logo"
             className="h-16 w-auto md:h-20"
           />
-          <span className="text-xl font-bold tracking-tight">
+          <span className="text-xl font-bold tracking-tight ml-2">
             <span className="text-blue-600">Digital</span> Fixers RVC
           </span>
         </div>
