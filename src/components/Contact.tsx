@@ -10,36 +10,9 @@ const Contact = () => {
     message: ''
   });
 
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('sending');
-
-    try {
-      const response = await fetch('https://formspree.io/f/myzjyqry', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', phone: '', message: '' });
-      } else {
-        throw new Error('Network response was not ok.');
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setStatus('error');
-    }
   };
 
   return (
@@ -53,7 +26,6 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          {/* Contact Info */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -62,6 +34,7 @@ const Contact = () => {
             className="bg-blue-50 p-8 rounded-lg shadow-sm"
           >
             <h3 className="text-2xl font-bold mb-6 text-blue-700">Contact Information</h3>
+            
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <div className="bg-blue-100 p-3 rounded-full">
@@ -72,6 +45,7 @@ const Contact = () => {
                   <p className="text-lg font-medium">516-315-4793</p>
                 </div>
               </div>
+              
               <div className="flex items-center gap-4">
                 <div className="bg-blue-100 p-3 rounded-full">
                   <Mail className="w-6 h-6 text-blue-600" />
@@ -81,6 +55,7 @@ const Contact = () => {
                   <p className="text-lg font-medium">digitalfixersrvc@gmail.com</p>
                 </div>
               </div>
+              
               <div className="flex items-center gap-4">
                 <div className="bg-blue-100 p-3 rounded-full">
                   <MessageSquare className="w-6 h-6 text-blue-600" />
@@ -91,7 +66,7 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-
+            
             <div className="mt-8 p-6 bg-white rounded-lg border border-blue-100">
               <h4 className="text-xl font-semibold mb-4 text-blue-700">Serving Rockville Centre and surrounding areas</h4>
               <p className="text-gray-600">
@@ -99,8 +74,7 @@ const Contact = () => {
               </p>
             </div>
           </motion.div>
-
-          {/* Contact Form */}
+          
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -108,57 +82,69 @@ const Contact = () => {
             viewport={{ once: true }}
           >
             <h3 className="text-2xl font-bold mb-6 text-blue-700">Send a Message</h3>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <input
-                type="text"
-                name="name"
-                required
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg"
-              />
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg"
-              />
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg"
-              />
-              <textarea
-                name="message"
-                rows={5}
-                required
-                placeholder="Your Message"
-                value={formData.message}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg"
-              />
+            
+            <form
+              action="https://formspree.io/f/xwpboole"
+              method="POST"
+              className="space-y-4"
+            >
+              <div>
+                <label htmlFor="name" className="block text-gray-700 mb-1">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="email" className="block text-gray-700 mb-1">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="phone" className="block text-gray-700 mb-1">Phone (optional)</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="message" className="block text-gray-700 mb-1">How can I help you?</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={5}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                ></textarea>
+              </div>
+              
               <button
                 type="submit"
-                disabled={status === 'sending'}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-all transform hover:scale-105"
               >
-                {status === 'sending' ? 'Sending...' : 'Send Message'}
+                Send Message
               </button>
-
-              {status === 'success' && (
-                <p className="text-green-600 text-sm mt-2">Message sent successfully!</p>
-              )}
-              {status === 'error' && (
-                <p className="text-red-600 text-sm mt-2">Oops! Something went wrong.</p>
-              )}
             </form>
           </motion.div>
         </div>

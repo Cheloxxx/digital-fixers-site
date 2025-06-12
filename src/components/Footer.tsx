@@ -6,18 +6,17 @@ const Footer = () => {
     <footer className="bg-blue-800 text-white py-12">
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-          <div className="flex items-center">
-            <img
-              src="src/assets/DigitalFixersLogoNoLettersWhite.png"
-              alt="Digital Fixers RVC Logo"
-              className="h-20 w-auto md:h-24 -mr-4"
-              />
+        <div className="flex items-center gap-4 mb-6 md:mb-0">
+          <img
+            src="/DigitalFixersLogoNoLettersWhite.png"
+            alt="Digital Fixers Logo"
+            className="h-8 w-auto"
+          />
+          <span className="text-2xl font-bold tracking-tight">
+            <span className="text-blue-300">Digital</span> Fixers RVC
+          </span>
+        </div>
 
-            <span className="text-xl font-bold tracking-tight">
-              <span className="text-blue-300">Digital</span> Fixers RVC
-            </span>
-          </div>
-          
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
             <a href="#services" className="text-blue-200 hover:text-white transition-colors">Services</a>
             <a href="#about" className="text-blue-200 hover:text-white transition-colors">About</a>
